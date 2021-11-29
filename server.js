@@ -13,7 +13,7 @@ app.use(express.json())
 
 // Requires routes
 require('./routes/apiRoutes')(app)
-require('./routes/htmlRoutes')
+require('./routes/htmlRoutes')(app)
 
 // Directs to use public folder
 app.use(express.static("public"))
