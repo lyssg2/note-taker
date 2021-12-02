@@ -5,7 +5,7 @@ const path = require('path')
 const api = require('./routes/index')
 
 // Express listening on port
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 
 // Sets up data parsing using Express
 app.use(express.urlencoded({ extended: true }))
@@ -13,7 +13,7 @@ app.use(express.json())
 
 // Directs to use public folder
 app.use(express.static("public"))
-app.use('api', api)
+app.use('/api', api)
 
 // Get requests
 app.get('/notes', (req, res) =>

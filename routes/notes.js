@@ -1,9 +1,11 @@
 // Required dependencies
 const express = require('express')
 const router = express.Router()
-let data = require('../db/db.json');
+const data = require('../db/db.json');
 const { v4: uuidv4 } = require('uuid')
 const fs = require('fs')
+    // const util = require('util')
+    // const readFromFile = util.promisify(fs.readFile)
 
 
 // GET request for notes
@@ -20,8 +22,18 @@ router.post('/', (req, res) => {
             text,
             id: uuidv4(),
         }
-        data.push(newNote)
-        res.json(data)
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
+            if (err) {
+                console.log('Please see error', err)
+            } else {
+                const parsedData = JSON.parse(data)
+                parsedData.push(newNote)
+                res.json(parsedData)
+                fs.writeFile('./db/db.json', JSON.stringify(parsedData, null, 4), (err) =>
+                    err ? console.error(err) : console.log(`Successfully added new note: ${newNote.title}`)
+                )
+            }
+        })
     }
 })
 
