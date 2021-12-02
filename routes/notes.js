@@ -2,7 +2,7 @@
 const express = require('express')
 const router = require('express').Router()
 let data = require('../db/db.json');
-const uuid = require('uuid')
+const { v4: uuidv4 } = require('uuid')
 const fs = require('fs')
 const util = require('util')
 const readFromFile = util.promisify(fs.readFile)
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
         const newNote = {
             title,
             text,
-            id: uuid(),
+            id: uuidv4(),
         }
         fs.readFile(data, 'utf8', (err, data) => {
             if (err) {
