@@ -16,7 +16,6 @@ app.use(express.static("public"))
 app.use('api', api)
 
 // Get requests
-
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, './public/notes.html'))
 )
