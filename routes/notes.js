@@ -4,13 +4,15 @@ const router = express.Router()
 const data = require('../db/db.json');
 const { v4: uuidv4 } = require('uuid')
 const fs = require('fs')
-    // const util = require('util')
-    // const readFromFile = util.promisify(fs.readFile)
-
+const path = require('path')
 
 // GET request for notes
 router.get('/', (req, res) => {
-    res.json(data);
+
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        var parsed = JSON.parse(data)
+        res.json(parsed);
+    })
 })
 
 // POST request route
@@ -28,6 +30,7 @@ router.post('/', (req, res) => {
             } else {
                 const parsedData = JSON.parse(data)
                 parsedData.push(newNote)
+                console.log('parse datd', parsedData)
                 res.json(parsedData)
                 fs.writeFile('./db/db.json', JSON.stringify(parsedData, null, 4), (err) =>
                     err ? console.error(err) : console.log(`Successfully added new note: ${newNote.title}`)
@@ -36,16 +39,5 @@ router.post('/', (req, res) => {
         })
     }
 })
-
-router.delete('/:id', (req, res) => {
-    const found = data.some(obj => obj.id === req.params.id);
-    if (found) {
-        data = data.filter(obj => obj.id !== req.params.id);
-        res.json(data);
-    } else {
-        res.status(400).json(data);
-    };
-});
-
 
 module.exports = router;
