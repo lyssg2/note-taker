@@ -27,6 +27,11 @@ https://guarded-cliffs-72749.herokuapp.com/
 ## Screenshot & Video
 
 
+https://user-images.githubusercontent.com/89744530/144540036-fed3d9d3-17cb-4981-b2d5-9a110eada743.mp4
+
+![2021-12-02 (5)](https://user-images.githubusercontent.com/89744530/144540049-f6306775-ff58-40ef-a961-d1afa08937c1.png)
+
+
 ## Author
 
 Alyssa (Lyss) Garcia
